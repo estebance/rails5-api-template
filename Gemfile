@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 # Use sqlite3 as the database for Active Record
@@ -43,7 +42,8 @@ gem 'quiet_assets', group: :development
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem "factory_girl_rails"
+  gem 'factory_girl_rails'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -54,12 +54,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'erb2haml'
-
 end
 
 group :test do
-  gem "rails-controller-testing", :git => "https://github.com/rails/rails-controller-testing"
-  gem "rspec-rails", "3.5.0.beta1"
+  gem 'rails-controller-testing', git: 'https://github.com/rails/rails-controller-testing'
+  gem 'rspec-rails', '3.5.0.beta1'
   gem 'faker'
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'

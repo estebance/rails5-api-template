@@ -1,19 +1,21 @@
 module API
+  # this class is an example about how to use this template
   class ItemsController < ApplicationController
+
     include DeviseTokenAuth::Concerns::SetUserByToken
     
     before_action :authenticate_user!
 
     def_param_group :authentication_headers do
-      header 'access-token', 'Access authentication token' ,:required => true
-      header 'uid', 'user email', :required => true
+      header 'access-token', 'Access authentication token' ,required: true
+      header 'uid', 'user email', required: true
     end
 
-    #GET "/items"
-    api :GET, "/items", "Show all items"
-    error :code => 401, :desc => "Unauthorized"
+    # GET "/items"
+    api :GET, '/items', 'Show all items'
+    error code: 401, desc: 'Unauthorized'
     param_group :authentication_headers
-    description "Obtain all items"
+    description 'Obtain all items'
     formats ['json']
     example '
     {
@@ -39,15 +41,15 @@ module API
     '
     def index
       items = Item.all
-      render json: items , status: 200
+      render json: items, status: 200
     end
 
-    #GET "/items/:id"
-    api :GET, "/items/:id", "Show item"
-    error :code => 401, :desc => "Unauthorized"
-    error :code => 404, :desc => "Item not found"
+    # GET "/items/:id"
+    api :GET, '/items/:id', 'Show item'
+    error code: 401, desc: 'Unauthorized'
+    error code: 404, desc: 'Item not found'
     param_group :authentication_headers
-    description "Obtain one item by id"
+    description 'Obtain one item by id'
     formats ['json']
     example '
     {
