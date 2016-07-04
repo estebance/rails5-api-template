@@ -1,13 +1,11 @@
 module API
   # this class is an example about how to use this template
   class ItemsController < ApplicationController
-
     include DeviseTokenAuth::Concerns::SetUserByToken
-    
     before_action :authenticate_user!
 
     def_param_group :authentication_headers do
-      header 'access-token', 'Access authentication token' ,required: true
+      header 'access-token', 'Access authentication token', required: true
       header 'uid', 'user email', required: true
     end
 
@@ -64,39 +62,40 @@ module API
     }'
     def show
       item = Item.find(params[:id])
-      render json: item , status: 200
+      render json: item, status: 200
     end
 
-     #POST "/items"
-     def create
+    # POST "/items"
+    def create
       item = Item.new(item_params)
       if item.save
         render json: item, status: 201
       else
         render json: item.errors, status: 422
       end
-     end
-     
-     #PATCH "/items/:id"
-     def update
+    end
+
+    # PATCH "/items/:id"
+    def update
       item = Item.find(params[:id])
       if item.update(item_params)
         render json: item, status: 200
       else
         render json: item.errors, status: 422
       end
-     end
+    end
 
-     #DELETE "/items/:id"
-     def destroy
+    # DELETE "/items/:id"
+    def destroy
       item = Item.find(params[:id])
       item.destroy
       head 204
-     end
+    end
 
-     private
-      def item_params 
-        params.require(:item).permit(:name,:quantity)
-      end
+    private
+
+    def item_params
+      params.require(:item).permit(:name, :quantity)
+    end
   end
 end
